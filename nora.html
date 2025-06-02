@@ -9,9 +9,10 @@
       text-align: center;
       margin-top: 100px;
       background-image: url("1748891910276.jpg");
-      background-repeat: repeat-y;
+      background-repeat: no-repeat;
       background-size: cover;
       color: white;
+      background-color: black;
     }
     input {
       padding: 10px;
@@ -35,7 +36,7 @@
 
     input.addEventListener("input", () => {
       if (input.value.trim().toLowerCase() === "olaf") {
-        output.innerHTML = "🌸 ❤️ Nagyon szeretlek! a világon a legjobban anyira hogy elmondani se tudom ezért csak anyial szolgálhatok hogy nap mint nap veled vagyok és írtam neked egy ujabb verset:";
+        output.innerHTML = "🌸 ❤️ Nagyon szeretlek! a világon a legjobban anyira hogy elmondani se tudom ezért csak anyival szolgálhatok hogy nap mint nap veled vagyok és írtam neked egy ujabb verset:";
       } else {
         output.innerHTML = "Nem ez a helyes!";
       }
