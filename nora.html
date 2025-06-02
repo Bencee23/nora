@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Nóra virág és szív</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-image: url("1748888310376.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: white;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Írd be a nevet:</h1>
+  <input type="text" id="nameInput" placeholder="helyes név?" />
+  <div id="output"></div>
+
+  <script>
+    const input = document.getElementById("nameInput");
+    const output = document.getElementById("output");
+
+    input.addEventListener("input", () => {
+      if (input.value.trim().toLowerCase() === "olaf") {
+        output.innerHTML = "🌸 ❤️ Nagyon szeretlek!";
+      } else {
+        output.innerHTML = "Nem ez a helyes!";
+      }
+    });
+  </script>
+  
+</body>
+</html>
