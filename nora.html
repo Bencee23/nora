@@ -7,44 +7,136 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 100px;
+      margin: 0;
+      padding-top: 80px;
       background-image: url("1748891910276.jpg");
-      background-repeat: repeat-y;
+       background-repeat: repeat-y;
       background-size: cover;
       color: white;
+      overflow: hidden;
     }
+
     input {
       padding: 10px;
       font-size: 16px;
     }
+
     #output {
       margin-top: 20px;
-      font-size: 40px;
+      font-size: 30px;
+    }
+
+    #loveLettersContainer {
+      margin-top: 120px;
+    }
+
+    .love-letter {
+      display: inline-block;
+      font-size: 60px;
+      margin: 0 5px;
+      opacity: 0;
+      transform: translateY(0);
+    }
+
+    .visible {
+      opacity: 1 !important;
+    }
+
+    .heart {
+      position: fixed;
+      top: -30px;
+      font-size: 30px;
+      pointer-events: none;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        top: 100vh;
+        opacity: 0;
+        transform: translateX(100px) rotate(360deg);
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>Írd be a nevet:</h1>
-  <input type="text" id="nameInput" placeholder="helyes név?" />
+  <h1>Írd be a nevet vagy üzenetet:</h1>
+  <input type="text" id="nameInput" placeholder="Helyes név?" />
   <div id="output"></div>
+
+  <div id="loveLettersContainer">
+    <span id="l" class="love-letter">L</span>
+    <span id="o" class="love-letter">O</span>
+    <span id="v" class="love-letter">V</span>
+    <span id="e" class="love-letter">E</span>
+  </div>
 
   <script>
     const input = document.getElementById("nameInput");
     const output = document.getElementById("output");
 
+    const el = {
+      l: document.getElementById("l"),
+      o: document.getElementById("o"),
+      v: document.getElementById("v"),
+      e: document.getElementById("e")
+    };
+
+    const letters = [el.l, el.o, el.v, el.e];
+
+    function animateLoveLetters() {
+      letters.forEach((letter, i) => {
+        letter.classList.add("visible");
+        letter.animate([
+          { transform: 'translateY(-60px)', opacity: 0 },
+          { transform: 'translateY(0)', opacity: 1 }
+        ], {
+          duration: 500,
+          delay: i * 200,
+          fill: 'forwards',
+          easing: 'ease-out'
+        });
+      });
+    }
+
+    function spawnHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 3000);
+    }
+
+    function startHearts(count = 15) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(spawnHeart, i * 100);
+      }
+    }
+
     input.addEventListener("input", () => {
       const value = input.value.trim().toLowerCase();
+      letters.forEach((letter) => {
+        letter.classList.remove("visible");
+      });
 
       if (value === "olaf") {
-        output.innerHTML = "🌸 ❤️ Nagyon szeretlek! a világon a legjobban anyira hogy elmondani se tudom ezért csak anyival szolgálhatok hogy nap mint nap veled vagyok és írtam neked egy ujabb verset: Szerelmem Nóra világom létre hozoja. Velem van hogyha kell és soha se engedel. Szeretlek fél év után is légyfent velem éjfél után is. Hiszen veled egy nap több mint 24 óraLégyvelem világom alkotoja. A következö név:szeretlek ";
+        output.innerHTML = "🌸 ❤️ Nagyon szeretlek! a világon a legjobban anyira hogy elmondani se tudom ezért csak anyival szolgálhatok hogy nap mint nap veled vagyok és írtam neked egy ujabb verset: Szerelmem Nóra világom létre hozoja. Velem van hogyha kell és soha se engedel. Szeretlek fél év után is légyfent velem éjfél után is. Hiszen veled egy nap több mint 24 óraLégyvelem világom alkotoja. A következö név:szeretlek és hiányzol";
       } else if (value === "szeretlek") {
         output.innerHTML = "Én jobban!";
+      } else if (value === "hiányzol") {
+        output.innerHTML = "Te is nagyon!❤️";
+        animateLoveLetters();
+        startHearts();
       } else {
         output.innerHTML = "Nem ez a helyes!";
       }
     });
   </script>
-  
 </body>
 </html>
