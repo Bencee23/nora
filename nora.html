@@ -34,8 +34,12 @@
     const output = document.getElementById("output");
 
     input.addEventListener("input", () => {
-      if (input.value.trim().toLowerCase() === "olaf") {
-        output.innerHTML = "🌸 ❤️ Nagyon szeretlek! a világon a legjobban anyira hogy elmondani se tudom ezért csak anyival szolgálhatok hogy nap mint nap veled vagyok és írtam neked egy ujabb verset: Szerelmem Nóra világom létre hozoja. Velem van hogyha kell és soha se engedel. Szeretlek fél év után is légyfent velem éjfél után is. Hiszen veled egy nap több mint 24 óraLégyvelem világom alkotoja.";
+      const value = input.value.trim().toLowerCase();
+
+      if (value === "olaf") {
+        output.innerHTML = "🌸 ❤️ Nagyon szeretlek! a világon a legjobban anyira hogy elmondani se tudom ezért csak anyival szolgálhatok hogy nap mint nap veled vagyok és írtam neked egy ujabb verset: Szerelmem Nóra világom létre hozoja. Velem van hogyha kell és soha se engedel. Szeretlek fél év után is légyfent velem éjfél után is. Hiszen veled egy nap több mint 24 óraLégyvelem világom alkotoja. A következö név:szeretlek ";
+      } else if (value === "szeretlek") {
+        output.innerHTML = "Én jobban!";
       } else {
         output.innerHTML = "Nem ez a helyes!";
       }
